@@ -15,5 +15,8 @@ else if($userData['password'] != md5($pass)){
 }
 else {
     echo "<h1>Hello ".$userData['fullname']."</h1>";
+    ?>
+    <input type="hidden" name="author" value=<?php echo $userData['user_id']?>>
+    <?php
 }
 ?>
