@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'dbconnect.php';
 $fullname = $_POST['fullname']??"";
 $username = $_POST['username']??"";
@@ -15,19 +16,21 @@ $confirm = $_POST['confirm']??"";
 </head>
 <body>
     <?php
-        if($password != $confirm){
-        ?>
-        <h1>Sorry your password and confirm password doesnot match!</h1>
-        <?php
+        if($password != $confirm){    
+            $_SESSION['error'] = 'Sorry your password and confirm password doesnot match!';
+            header('Location:loginpage.php');
         }
         else if(check_username($username)){
-            echo '<h1>Sorry Username already exists</h1>';
+            $_SESSION['error'] = 'Sorry Username already exists!';
+            header('Location:loginpage.php');
         }
         else if(check_email($email)){
-            echo '<h1>Sorry Email already exists</h1>';
+            $_SESSION['error'] = 'Sorry Email already exists!';
+            header('Location:loginpage.php');
         }
         else if(strlen($password)<8){
-            echo '<h1>Password must be atleast 8 characters long</h1>';
+            $_SESSION['error'] = 'Password must be atleast 8 characters long!';
+            header('Location:loginpage.php');
         }
         else {
             $encryptpass = md5($password);
@@ -38,7 +41,8 @@ $confirm = $_POST['confirm']??"";
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':pw', $encryptpass);
             $stmt->execute();
-            echo '<h1>Registered Successfully! Hurray!!!!</h1>';
+            $_SESSION['error'] = 'Registered Successfully! Login to continue';
+            header('Location:loginpage.php');
         }
     ?>
 </body>
