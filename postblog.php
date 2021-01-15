@@ -7,8 +7,8 @@ else {
     header('Location:loginpage.php');
 }
 require_once "dbconnect.php";
-$title = $_POST['title'];
-$description = $_POST['description'];
+$title = $_POST['title']??"";
+$description = $_POST['description']??"";
 
 if($title==""){
     // TODO: return error

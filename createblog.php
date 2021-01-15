@@ -16,7 +16,7 @@ else {
     <style>
     .container {
         position: relative;
-        height: 100vh;
+        height: calc(100vh - 30px);
     }
     .content {
         position: absolute;
@@ -28,6 +28,8 @@ else {
 </head>
 <body>
 <div class="container">
+<a href="index.php">Home</a>
+<a href="logout.php">Logout</a>
 <div class="content">
 <h1>Create your blog</h1>
     <form action="postblog.php" method="POST">
