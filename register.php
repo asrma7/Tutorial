@@ -7,30 +7,22 @@ $email = $_POST['email']??"";
 $password = $_POST['pass']??"";
 $confirm = $_POST['confirm']??"";
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
     <?php
-        if($password != $confirm){    
-            $_SESSION['error'] = 'Sorry your password and confirm password doesnot match!';
-            header('Location:loginpage.php');
+        if($password != $confirm){
+            $message = 'Sorry your password and confirm password doesnot match!';
+            $status = 201;
         }
         else if(check_username($username)){
-            $_SESSION['error'] = 'Sorry Username already exists!';
-            header('Location:loginpage.php');
+            $message = 'Sorry Username already exists!';
+            $status = 201;
         }
         else if(check_email($email)){
-            $_SESSION['error'] = 'Sorry Email already exists!';
-            header('Location:loginpage.php');
+            $message = 'Sorry Email already exists!';
+            $status = 201;
         }
         else if(strlen($password)<8){
-            $_SESSION['error'] = 'Password must be atleast 8 characters long!';
-            header('Location:loginpage.php');
+            $message = 'Password must be atleast 8 characters long!';
+            $status = 201;
         }
         else {
             $encryptpass = md5($password);
@@ -41,12 +33,11 @@ $confirm = $_POST['confirm']??"";
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':pw', $encryptpass);
             $stmt->execute();
-            $_SESSION['error'] = 'Registered Successfully! Login to continue';
-            header('Location:loginpage.php');
+            $message = 'Registered Successfully! Login to continue';
+            $status = 200;
         }
+        echo json_encode(['status'=>$status, 'message'=>$message]);
     ?>
-</body>
-</html>
 
 <?php
 function check_username($un) {

@@ -1,7 +1,5 @@
 <?php
 session_start();
-$error = $_SESSION['error']??"";
-unset($_SESSION['error']);
 if(isset($_SESSION['user'])){
     header('Location:index.php');
 }
@@ -14,24 +12,24 @@ if(isset($_SESSION['user'])){
     <title>Tutorial</title>
 </head>
 <body>
-<h1 class="msg"><?php echo $error;?></h1> 
+<h1 id="msg"></h1> 
 <h1>Register to our site</h1>
-    <form action="register.php" method="POST">
+    <form method="POST" onsubmit="registerSubmit()">
     <table>
         <tr>
-        <td>Full Name:</td><td><input type="text" name="fullname"></td>
+        <td>Full Name:</td><td><input type="text" id="fullname"></td>
         </tr>
         <tr>
-        <td>Username:</td><td><input type="text" name="username"></td>
+        <td>Username:</td><td><input type="text" id="username"></td>
         </tr>
         <tr>
-        <td>Email:</td><td><input type="email" name="email"></td>
+        <td>Email:</td><td><input type="email" id="email"></td>
         </tr>
         <tr>
-        <td>Password:</td><td><input type="password" name="pass"></td>
+        <td>Password:</td><td><input type="password" id="pass"></td>
         </tr>
         <tr>
-        <td>Confirm Password:</td><td><input type="password" name="confirm"></td>
+        <td>Confirm Password:</td><td><input type="password" id="confirm"></td>
         </tr>
         <tr>
         <td colspan=2><center><input type="submit" value="Register"></center></td>
@@ -39,18 +37,22 @@ if(isset($_SESSION['user'])){
         </table>
     </form>
     <h1>Login to our site</h1>
-    <form action="login.php" method="POST">
+    <form method="POST" onsubmit="loginSubmit()">
     <table>
         <tr>
-        <td>Login:</td><td><input type="text" name="user"></td>
+        <td>Login:</td><td><input type="text" id="user"></td>
         </tr>
         <tr>
-        <td>Password:</td><td><input type="password" name="pass"></td>
+        <td>Password:</td><td><input type="password" id="password"></td>
         </tr>
         <tr>
         <td colspan=2><center><input type="submit" value="Login"></center></td>
         </tr>
         </table>
     </form>
+    <?php
+    require_once "footer.php";
+    ?>
+    <script src="scripts/script.js"></script>
 </body>
 </html>

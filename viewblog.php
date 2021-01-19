@@ -24,5 +24,8 @@ $blog = $stmt->fetch(PDO::FETCH_ASSOC);
     <h1><?php echo $blog['title'];?></h1>
     <h2>By:- <?php echo $blog['authorname'];?></h2>
     <p><?php echo $blog['description'];?></p>
+    <?php
+    require_once "footer.php";
+    ?>
 </body>
 </html>
